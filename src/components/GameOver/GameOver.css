@@ -1,0 +1,17 @@
+.game-over {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  margin-left: -50px;
+}
+
+.game-over-title {
+  border: 3px solid #706b10;
+  background: #000103;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px 30px 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -1,0 +1,11 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #be560b url(https://images7.alphacoders.com/310/310674.jpg)
+    no-repeat;
+  background-size: cover;
+  /* cursor: url("./aim.png"), auto; */
+}

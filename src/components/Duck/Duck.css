@@ -1,0 +1,7 @@
+.duck {
+  width: 100px;
+  height: 100px;
+  background: url(./duck.png);
+  background-size: cover;
+  position: absolute;
+}

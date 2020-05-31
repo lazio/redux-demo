@@ -1,0 +1,20 @@
+.scoreboard {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  border: 3px solid #706b10;
+  background: #000103;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 7px 20px 10px 20px;
+  text-align: center;
+}
+
+.scoreboard-number {
+  font-size: 20px;
+}
+
+.scoreboard-title {
+  font-size: 14px;
+}
