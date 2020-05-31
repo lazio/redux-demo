@@ -1,14 +1,6 @@
-const scoreReducer = function (state = 0, action) {
-  console.log(action);
+import { combineReducers } from "redux";
 
-  switch (action.type) {
-    case "HIT":
-      return state + 1;
-    case "RESET":
-      return 0;
-    default:
-      return state;
-  }
-};
+import scoreReducer from "./score.js";
+import usernameReducer from "./username.js";
 
-export default scoreReducer;
+export default combineReducers({ scoreReducer, usernameReducer });

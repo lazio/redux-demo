@@ -45,7 +45,7 @@ function App({ score, onReset }) {
 
 const mapStateToProps = (state) => {
   return {
-    score: state,
+    score: state.scoreReducer,
   };
 };
 

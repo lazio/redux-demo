@@ -9,6 +9,8 @@ function getRandomArbitrary(min, max) {
 }
 
 function Game({ score, onDuckClick }) {
+  console.log(123123, score);
+
   const [duck, setDuck] = useState(null);
 
   const onDuckHit = () => {
@@ -39,7 +41,7 @@ function Game({ score, onDuckClick }) {
 
 const mapStateToProps = (state) => {
   return {
-    score: state,
+    score: state.scoreReducer,
   };
 };
 

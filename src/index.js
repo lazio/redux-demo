@@ -6,9 +6,10 @@ import "./index.css";
 import App from "./components/App/App.js";
 import * as serviceWorker from "./serviceWorker";
 
-import scoreReducer from "./reducers";
+import reducers from "./reducers";
 
-let store = createStore(scoreReducer);
+let store = createStore(reducers);
+console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
