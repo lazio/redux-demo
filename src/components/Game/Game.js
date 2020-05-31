@@ -26,9 +26,9 @@ function Game({ score, onDuckClick }) {
       };
 
       setDuck(<Duck position={position} onClick={onDuckHit} />);
-
-      return () => clearInterval(renderDuck);
     }, 3000);
+
+    return () => clearInterval(renderDuck);
   }, []);
 
   return (

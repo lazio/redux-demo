@@ -12,7 +12,7 @@ function Leaderboard() {
   return (
     <ol className="leaderboard">
       {Object.keys(leaders).map((item) => (
-        <li>{item}</li>
+        <li key={item}>{item}</li>
       ))}
     </ol>
   );
