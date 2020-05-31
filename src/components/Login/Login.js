@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 
 import "./Login.css";
 
@@ -20,4 +21,14 @@ function Login({ setUsername }) {
   );
 }
 
-export default Login;
+const mapStateToProps = () => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUsername: (username) => dispatch({ type: "SET_USERNAME", username }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -16,9 +16,8 @@ function saveResult(username) {
   localStorage.setItem(STORAGE_NAME, stringifiedResults);
 }
 
-function App({ score, onReset }) {
+function App({ score, username, onReset }) {
   const [gameOver, setGameOver] = useState(false);
-  const [username, setUsername] = useState("");
 
   const onRestart = () => {
     onReset();
@@ -40,12 +39,13 @@ function App({ score, onReset }) {
     return <Game />;
   }
 
-  return <Login setUsername={setUsername} />;
+  return <Login />;
 }
 
 const mapStateToProps = (state) => {
   return {
     score: state.scoreReducer,
+    username: state.usernameReducer,
   };
 };
 
