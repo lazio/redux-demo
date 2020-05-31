@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import Duck from "../Duck/Duck.js";
 import Scoreboard from "../Scoreboard/Scoreboard.js";
 
@@ -36,4 +37,16 @@ function Game({ score, onDuckClick }) {
   );
 }
 
-export default Game;
+const mapStateToProps = (state) => {
+  return {
+    score: state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDuckClick: () => dispatch({ type: "HIT" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

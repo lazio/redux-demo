@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import Game from "../Game/Game.js";
 import GameOver from "../GameOver/GameOver.js";
 import Login from "../Login/Login";
 import "./App.css";
 
 const DUCKS_TO_WIN = 1;
+const STORAGE_NAME = "duckhunt";
 
 function saveResult(username) {
-  const savedResults = localStorage.getItem("duckhunt");
+  const savedResults = localStorage.getItem(STORAGE_NAME);
   const results = savedResults ? JSON.parse(savedResults) : {};
   const updatedResults = Object.assign(results, { [username]: 1 });
   const stringifiedResults = JSON.stringify(updatedResults);
-  localStorage.setItem("duckhunt", stringifiedResults);
+  localStorage.setItem(STORAGE_NAME, stringifiedResults);
 }
 
-function App() {
-  const [score, setScore] = useState(0);
+function App({ score, onReset }) {
   const [gameOver, setGameOver] = useState(false);
   const [username, setUsername] = useState("");
 
-  const onDuckHit = () => {
-    setScore((prevScore) => (prevScore += 1));
-  };
-
   const onRestart = () => {
-    setScore(0);
+    onReset();
     setGameOver(false);
   };
 
@@ -40,10 +37,22 @@ function App() {
   }
 
   if (username) {
-    return <Game score={score} onDuckClick={onDuckHit} />;
+    return <Game />;
   }
 
   return <Login setUsername={setUsername} />;
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    score: state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onReset: () => dispatch({ type: "RESET" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
