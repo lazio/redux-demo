@@ -1,55 +1,49 @@
 import React, { useState, useEffect } from "react";
-import Duck from "../Duck/Duck.js";
-import Scoreboard from "../Scoreboard/Scoreboard.js";
+import Game from "../Game/Game.js";
 import GameOver from "../GameOver/GameOver.js";
+import Login from "../Login/Login";
 import "./App.css";
 
 const DUCKS_TO_WIN = 1;
 
-function getRandomArbitrary(min, max) {
-  const randomValue = Math.random() * (max - min) + min;
-  return randomValue.toFixed();
+function saveResult(username) {
+  const savedResults = localStorage.getItem("duckhunt");
+  const results = savedResults ? JSON.parse(savedResults) : {};
+  const updatedResults = Object.assign(results, { [username]: 1 });
+  const stringifiedResults = JSON.stringify(updatedResults);
+  localStorage.setItem("duckhunt", stringifiedResults);
 }
 
 function App() {
-  const [duck, setDuck] = useState(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [username, setUsername] = useState("");
 
-  const onDuckClick = () => {
+  const onDuckHit = () => {
     setScore((prevScore) => (prevScore += 1));
-    setDuck(null);
   };
 
-  useEffect(() => {
-    const renderDuck = setInterval(() => {
-      const position = {
-        x: getRandomArbitrary(0, window.innerWidth),
-        y: getRandomArbitrary(0, window.innerHeight),
-      };
-
-      setDuck(<Duck position={position} onClick={onDuckClick} />);
-
-      return () => clearInterval(renderDuck);
-    }, 3000);
-  }, []);
+  const onRestart = () => {
+    setScore(0);
+    setGameOver(false);
+  };
 
   useEffect(() => {
     if (score >= DUCKS_TO_WIN) {
       setGameOver(true);
+      saveResult(username);
     }
-  }, [score]);
+  }, [score, username]);
 
   if (gameOver) {
-    return <GameOver />;
+    return <GameOver restart={onRestart} />;
   }
 
-  return (
-    <div className="App">
-      {duck}
-      <Scoreboard score={score} />
-    </div>
-  );
+  if (username) {
+    return <Game score={score} onDuckClick={onDuckHit} />;
+  }
+
+  return <Login setUsername={setUsername} />;
 }
 
 export default App;

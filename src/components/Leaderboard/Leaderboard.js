@@ -1,15 +1,19 @@
 import React from "react";
 import "./Leaderboard.css";
 
+function getLeaders() {
+  const leaders = localStorage.getItem("duckhunt");
+  return JSON.parse(leaders);
+}
+
 function Leaderboard() {
+  const leaders = getLeaders();
+
   return (
-    <ol class="leaderboard">
-      <li>Tom/Doc/Kertis</li>
-      <li>Alex Glukk</li>
-      <li>RIP Maniak</li>
-      <li>Tom/Doc/Kertis</li>
-      <li>Alex Glukk</li>
-      <li>RIP Maniak</li>
+    <ol className="leaderboard">
+      {Object.keys(leaders).map((item) => (
+        <li>{item}</li>
+      ))}
     </ol>
   );
 }
