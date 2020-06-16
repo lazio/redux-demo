@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Game from "../Game/Game.js";
 import GameOver from "../GameOver/GameOver.js";
 import Login from "../Login/Login";
 import "./App.css";
 
-const DUCKS_TO_WIN = 1;
+const DUCKS_TO_WIN = 3;
 const STORAGE_NAME = "duckhunt";
 
 function saveResult(username) {
@@ -16,8 +16,12 @@ function saveResult(username) {
   localStorage.setItem(STORAGE_NAME, stringifiedResults);
 }
 
-function App({ score, username, onReset }) {
+function App() {
   const [gameOver, setGameOver] = useState(false);
+  const dispatch = useDispatch();
+  const score = useSelector((state) => state.scoreReducer);
+  const username = useSelector((state) => state.usernameReducer);
+  const onReset = () => dispatch({ type: "RESET" });
 
   const onRestart = () => {
     onReset();
@@ -42,17 +46,4 @@ function App({ score, username, onReset }) {
   return <Login />;
 }
 
-const mapStateToProps = (state) => {
-  return {
-    score: state.scoreReducer,
-    username: state.usernameReducer,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onReset: () => dispatch({ type: "RESET" }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

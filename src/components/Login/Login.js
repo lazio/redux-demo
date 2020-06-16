@@ -1,10 +1,14 @@
 import React, { useRef } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import "./Login.css";
 
-function Login({ setUsername }) {
+function Login() {
   const inputRef = useRef();
+  const dispatch = useDispatch();
+  const setUsername = (username) => {
+    dispatch({ type: "SET_USERNAME", username });
+  };
 
   const loginWIthUsername = (e) => {
     e.preventDefault();
@@ -21,14 +25,4 @@ function Login({ setUsername }) {
   );
 }
 
-const mapStateToProps = () => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUsername: (username) => dispatch({ type: "SET_USERNAME", username }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

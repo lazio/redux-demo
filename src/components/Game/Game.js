@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import Duck from "../Duck/Duck.js";
-import Scoreboard from "../Scoreboard/Scoreboard.js";
+import { useSelector, useDispatch } from "react-redux";
+import Duck from "./components/Duck/Duck.js";
+import Scoreboard from "./components/Scoreboard/Scoreboard.js";
 
 function getRandomArbitrary(min, max) {
   const randomValue = Math.random() * (max - min) + min;
   return randomValue.toFixed();
 }
 
-function Game({ score, onDuckClick }) {
-  console.log(123123, score);
-
+function Game() {
   const [duck, setDuck] = useState(null);
+  const dispatch = useDispatch();
+  const score = useSelector((state) => state.scoreReducer);
+  const onDuckClick = () => dispatch({ type: "HIT" });
 
   const onDuckHit = () => {
     onDuckClick();
@@ -39,16 +40,4 @@ function Game({ score, onDuckClick }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    score: state.scoreReducer,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDuckClick: () => dispatch({ type: "HIT" }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default Game;

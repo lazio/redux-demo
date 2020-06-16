@@ -8,8 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import reducers from "./reducers";
 
-let store = createStore(reducers);
-console.log(store.getState());
+const store = createStore(reducers);
 
 ReactDOM.render(
   <React.StrictMode>
