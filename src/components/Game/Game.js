@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Duck from "../Duck/Duck.js";
-import Scoreboard from "../Scoreboard/Scoreboard.js";
+import Duck from "./components/Duck/Duck.js";
+import Scoreboard from "./components/Scoreboard/Scoreboard.js";
 
 function getRandomArbitrary(min, max) {
   const randomValue = Math.random() * (max - min) + min;

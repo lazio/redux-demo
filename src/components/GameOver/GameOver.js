@@ -1,6 +1,6 @@
 import React from "react";
 
-import Leaderboard from "../Leaderboard/Leaderboard";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 
 import "./GameOver.css";
 
